@@ -14,7 +14,7 @@ public class MainResponceDto {
     private String name;
     private String schedule;
     private LocalDate date;
-    private LocalDate updateDate;
+    private LocalDate editDate;
     private String pw;
 
     public MainResponceDto(Schedule saveSchedule) {
@@ -22,16 +22,16 @@ public class MainResponceDto {
         this.name = saveSchedule.getName();
         this.schedule = saveSchedule.getSchedule();
         this.date = saveSchedule.getDate();
-        this.updateDate = saveSchedule.getUpdateDate();
+        this.editDate = saveSchedule.getUpdateDate();
         this.pw = saveSchedule.getPw();
     }
 
-    public MainResponceDto(Long id, String name, String schedule, LocalDate date, String pw, LocalDate updateDate) {
+    public MainResponceDto(Long id, String name, String schedule, LocalDate date, String pw, LocalDate editDate) {
         this.id = id;
         this.name = name;
         this.schedule = schedule;
         this.date = date;
-        this.updateDate = updateDate;
+        this.editDate = editDate;
         this.pw = pw;
     }
 }

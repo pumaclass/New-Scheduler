@@ -31,7 +31,31 @@ public class MainService {
     }
 
     public List<MainResponceDto> getSchedule() {
+        //조회를 위해선 service클래스에서 관여할게 딱히 없으므로 mainrepository로 보낸다.
         return mainRepository.findAll();
+    }
+
+    public Long updateSchedule(Long id, MainRequestDto requestDto) {
+        //받아온 id를 리포지토리에 보내고
+        Schedule schedule = mainRepository.findById(id);
+        //받아온 id값이 null이 아니라면 리포지토리에 id와 requestDto를 주고 id를 반환한다.
+        if (schedule != null) {
+            mainRepository.updateSchedule(id, requestDto);
+            return id;
+        } else {
+            throw new IllegalArgumentException("선택한 입력이 존재하지않습니다.");
+        }
+    }
+
+    public Long deleteSchedule(Long id) {
+        Schedule schedule = mainRepository.findById(id);
+        if(schedule != null){
+            mainRepository.deleteSchedule(id);
+        }else{
+            throw new IllegalArgumentException("선택한 입력이 존재하지 않습니다");
+
+        }
+        return id;
     }
 }
 

@@ -1,5 +1,6 @@
 package com.sparta.newproject.mainRepository;
 
+import com.sparta.newproject.dto.MainRequestDto;
 import com.sparta.newproject.dto.MainResponceDto;
 import com.sparta.newproject.entity.Schedule;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,6 +40,7 @@ public class MainRepository {
             return ps;
         },keyHolder);
         Long id = keyHolder.getKey().longValue();
+        schedule.setId(id);
         return schedule;
     }
 
@@ -57,5 +59,31 @@ public class MainRepository {
                 return new MainResponceDto(id, name, schedule, date, pw, updateDate);
             }
         });
+    }
+
+    public Schedule findById(Long id) {
+                String sql = "SELECT * FROM schedule WHERE id = ?";
+        return jdbcTemplate.query(sql, resultSet -> {
+            if (resultSet.next()) {
+                Schedule schedule = new Schedule();
+                schedule.setId(resultSet.getLong("id"));
+                schedule.setName(resultSet.getString("name"));
+                schedule.setSchedule(resultSet.getString("schedule"));
+                return schedule;
+            } else {
+                return null;
+            }
+        }, id);
+    }
+
+    public void updateSchedule(Long id, MainRequestDto requestDto) {
+            String sql = "UPDATE schedule SET name = ?, schedule = ?, editDate = ?, pw = ? WHERE id = ?";
+            jdbcTemplate.update(sql, requestDto.getName(), requestDto.getSchedule(),
+                    requestDto.getDate(), requestDto.getPw(), id);
+    }
+
+    public void deleteSchedule(Long id) {
+        String sql = "DELETE FROM schedule WHERE id = ?";
+        jdbcTemplate.update(sql, id);
     }
 }
