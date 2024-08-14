@@ -6,6 +6,8 @@ import com.sparta.newproject.entity.Schedule;
 import com.sparta.newproject.mainRepository.MainRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MainService {
     public final MainRepository mainRepository;
@@ -28,6 +30,9 @@ public class MainService {
 
     }
 
+    public List<MainResponceDto> getSchedule() {
+        return mainRepository.findAll();
+    }
 }
 
 
