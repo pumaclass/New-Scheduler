@@ -29,14 +29,15 @@ public class MainRepository {
 
         //일단 이런게 있구나 정도로 이해하자
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        String sql = "INSERT INTO schedule(name,schedule,date,pw) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO schedule(name,schedule,email,date,pw) VALUES(?,?,?,?,?)";
         jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setString(1, schedule.getName());
             ps.setString(2, schedule.getSchedule());
-            ps.setObject(3, schedule.getDate());
-            ps.setString(4, schedule.getPw());
+            ps.setString(3, schedule.getEmail());
+            ps.setObject(4, schedule.getDate());
+            ps.setString(5, schedule.getPw());
             return ps;
         },keyHolder);
         Long id = keyHolder.getKey().longValue();
