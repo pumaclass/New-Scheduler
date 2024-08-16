@@ -3,10 +3,7 @@ package com.sparta.newproject.maincontroller;
 import com.sparta.newproject.dto.MainRequestDto;
 import com.sparta.newproject.dto.MainResponceDto;
 import com.sparta.newproject.mainservice.MainService;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 // 저장, 조회, 수정, 삭제를 구현 할거야
@@ -53,7 +50,7 @@ public class MainController {
     }
 
     @PutMapping("schedules/{id}")
-    public Long updateSchedule(@PathVariable Long id, MainRequestDto requestDto){
+    public Long updateSchedule(@PathVariable Long id,@RequestBody MainRequestDto requestDto){
         return mainService.updateSchedule(id, requestDto);
     }
 

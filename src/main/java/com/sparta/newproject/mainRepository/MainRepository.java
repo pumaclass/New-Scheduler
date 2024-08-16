@@ -53,10 +53,11 @@ public class MainRepository {
                 Long id = rs.getLong("id");
                 String name = rs.getString("name");
                 String schedule = rs.getString("schedule");
+                String email = rs.getString("email");
                 LocalDate date = rs.getDate("date").toLocalDate();
                 String pw = rs.getString("pw");
-                LocalDate updateDate = rs.getDate("date").toLocalDate();
-                return new MainResponceDto(id, name, schedule, date, pw, updateDate);
+                LocalDate editDate = rs.getDate("date").toLocalDate();
+                return new MainResponceDto(id, name, schedule, email, date, pw, editDate);
             }
         });
     }
@@ -69,6 +70,7 @@ public class MainRepository {
                 schedule.setId(resultSet.getLong("id"));
                 schedule.setName(resultSet.getString("name"));
                 schedule.setSchedule(resultSet.getString("schedule"));
+                schedule.setPw(resultSet.getString("pw"));
                 return schedule;
             } else {
                 return null;
@@ -77,8 +79,8 @@ public class MainRepository {
     }
 
     public void updateSchedule(Long id, MainRequestDto requestDto) {
-            String sql = "UPDATE schedule SET name = ?, schedule = ?, editDate = ?, pw = ? WHERE id = ?";
-            jdbcTemplate.update(sql, requestDto.getName(), requestDto.getSchedule(),
+            String sql = "UPDATE schedule SET name = ?, schedule = ?, email = ?, editDate = ?, pw = ? WHERE id = ?";
+            jdbcTemplate.update(sql, requestDto.getName(), requestDto.getSchedule(), requestDto.getEmail(),
                     requestDto.getDate(), requestDto.getPw(), id);
     }
 

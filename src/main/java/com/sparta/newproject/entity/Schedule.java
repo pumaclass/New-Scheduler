@@ -15,15 +15,17 @@ public class Schedule {
     private Long id;
     private String name;
     private String schedule;
+    private String email;
     private LocalDate date;
-    private LocalDate updateDate;
+    private LocalDate editDate;
     private String pw;
 
     public Schedule(MainRequestDto requestDto) {
         this.name = requestDto.getName();
         this.schedule = requestDto.getSchedule();
+        this.email = requestDto.getEmail();
         this.date = requestDto.getDate();
-        this.updateDate = requestDto.getUpdateDate();
+        this.editDate = requestDto.getEditDate();
         this.pw = requestDto.getPw();
     }
 }
